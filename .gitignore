@@ -1,0 +1,53 @@
+# https://git-scm.com/docs/gitignore
+
+# Dependencies
+node_modules/
+vendor/
+.pnpm-store/
+
+# Build output
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# Editor directories
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Temp files
+*.tmp
+*.temp
+tmp/
+temp/
+.cache/
+
+# Coverage
+coverage/
+.nyc_output/
+
+# Package lock files (keep if desired)
+# package-lock.json
+# yarn.lock

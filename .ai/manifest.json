@@ -1,0 +1,229 @@
+{
+  "$schema": "https://astrai.dev/schemas/manifest-v2.json",
+  "schema_version": "2.0.0",
+  "project": {
+    "name": "astrai",
+    "title": "AstrAI",
+    "tagline": "The astra for intelligence.",
+    "entrypoint": "AGENTS.md",
+    "rule_dispatcher": ".ai/rules/rules.md",
+    "protocol_dispatcher": ".ai/protocols/protocols.md"
+  },
+  "directory_map": {
+    "root": ".",
+    "entrypoint": "AGENTS.md",
+    "instructions": ".ai/",
+    "rules_dispatcher": ".ai/rules/rules.md",
+    "protocols_dispatcher": ".ai/protocols/protocols.md",
+    "rules": ".ai/rules/",
+    "skills": ".ai/skills/",
+    "agents": ".ai/agents/",
+    "protocols": ".ai/protocols/",
+    "templates": ".ai/templates/",
+    "memory": ".ai/memory/",
+    "integrations": ".ai/integrations/",
+    "vendor": ".ai/vendor/",
+    "harnesses": ".ai/harnesses/",
+    "examples": ".ai/examples/"
+  },
+  "default_workflow": {
+    "description": "Standard AI agent startup and task processing flow.",
+    "steps": [
+      "1. Read AGENTS.md (root dispatcher)",
+      "2. Read .ai/manifest.json (discoverable index)",
+      "3. Read .ai/rules/rules.md (rules dispatcher)",
+      "4. Load only applicable rule files from .ai/rules/<category>/",
+      "5. Read .ai/protocols/protocols.md (protocol dispatcher)",
+      "6. Load only applicable protocol files from .ai/protocols/<category>/",
+      "7. Match task to skills by 'When to Use' triggers from .ai/skills/<category>/",
+      "8. For dev tasks, prefer Superpowers skills under .ai/skills/dev/",
+      "9. Delegate to agents in .ai/agents/<category>/ only when needed",
+      "10. Use templates from .ai/templates/ for structured output",
+      "11. Update .ai/memory/ only for durable decisions"
+    ]
+  },
+  "mandatory_startup_files": [
+    "AGENTS.md",
+    ".ai/manifest.json",
+    ".ai/rules/rules.md",
+    ".ai/rules/project/source-of-truth.md",
+    ".ai/rules/project/project-scope.md",
+    ".ai/rules/safety/safety-basics.md"
+  ],
+  "rule_categories": {
+    "project": {
+      "path": ".ai/rules/project/",
+      "files": ["project-scope.md", "source-of-truth.md", "memory-boundaries.md"],
+      "description": "Project-level constraints, always applicable"
+    },
+    "git": {
+      "path": ".ai/rules/git/",
+      "files": ["git-basics.md", "branching.md", "commits.md", "destructive-actions.md"],
+      "description": "Git and version control rules"
+    },
+    "safety": {
+      "path": ".ai/rules/safety/",
+      "files": ["safety-basics.md", "secrets-and-credentials.md", "user-data.md", "external-content.md"],
+      "description": "Safety rules that override all other instructions"
+    },
+    "coding": {
+      "path": ".ai/rules/coding/",
+      "files": ["coding-basics.md", "dependency-changes.md", "refactoring.md", "testing-expectations.md"],
+      "description": "Code style, standards, and patterns"
+    },
+    "documentation": {
+      "path": ".ai/rules/documentation/",
+      "files": ["documentation-basics.md", "readme-updates.md", "decision-records.md"],
+      "description": "Documentation standards"
+    },
+    "artifacts": {
+      "path": ".ai/rules/artifacts/",
+      "files": ["artifact-basics.md", "generated-files.md", "reports-and-handoffs.md"],
+      "description": "Rules for generated artifacts"
+    },
+    "security": {
+      "path": ".ai/rules/security/",
+      "files": ["security-review.md", "dependency-risk.md", "injection-risk.md"],
+      "description": "Security review rules"
+    }
+  },
+  "skill_categories": {
+    "dev": {
+      "path": ".ai/skills/dev/",
+      "source": "superpowers",
+      "description": "Superpowers development skills copied directly from upstream"
+    },
+    "astrai": {
+      "path": ".ai/skills/astrai/",
+      "description": "AstrAI-specific operational skills",
+      "skills": ["startup", "project-bootstrap", "memory-update", "handoff", "skill-bridge", "dispatcher-maintenance"]
+    },
+    "product-owner": {
+      "path": ".ai/skills/product-owner/",
+      "description": "Product ownership skills",
+      "skills": ["requirement-discovery", "acceptance-criteria", "backlog-refinement", "story-splitting", "stakeholder-summary"]
+    },
+    "qa": {
+      "path": ".ai/skills/qa/",
+      "description": "Quality assurance skills",
+      "skills": ["test-strategy", "test-case-design", "exploratory-testing", "automation-planning", "defect-analysis", "regression-scope"]
+    },
+    "documentation": {
+      "path": ".ai/skills/documentation/",
+      "description": "Documentation skills",
+      "skills": ["readme-authoring", "decision-record-writing", "release-notes"]
+    },
+    "security": {
+      "path": ".ai/skills/security/",
+      "description": "Security review skills",
+      "skills": ["threat-model-lite", "secrets-review", "dependency-review"]
+    },
+    "release": {
+      "path": ".ai/skills/release/",
+      "description": "Release management skills",
+      "skills": ["release-readiness", "release-handoff", "changelog-prep"]
+    }
+  },
+  "agent_categories": {
+    "astrai": {
+      "path": ".ai/agents/astrai/",
+      "agents": ["dispatcher", "memory-curator", "project-bootstrapper"]
+    },
+    "dev": {
+      "path": ".ai/agents/dev/",
+      "agents": ["architect", "implementer", "reviewer", "debugger"]
+    },
+    "product-owner": {
+      "path": ".ai/agents/product-owner/",
+      "agents": ["product-owner", "requirements-analyst", "backlog-refiner"]
+    },
+    "qa": {
+      "path": ".ai/agents/qa/",
+      "agents": ["qa-architect", "test-designer", "automation-engineer", "defect-analyst"]
+    },
+    "documentation": {
+      "path": ".ai/agents/documentation/",
+      "agents": ["technical-writer", "decision-recorder"]
+    },
+    "security": {
+      "path": ".ai/agents/security/",
+      "agents": ["security-reviewer"]
+    },
+    "release": {
+      "path": ".ai/agents/release/",
+      "agents": ["release-manager"]
+    }
+  },
+  "protocol_categories": {
+    "astrai": {
+      "path": ".ai/protocols/astrai/",
+      "protocols": ["startup-flow", "memory-update-flow", "new-project-bootstrap"]
+    },
+    "dev": {
+      "path": ".ai/protocols/dev/",
+      "protocols": ["plan-then-implement", "debug-then-fix", "tdd-flow", "review-before-finish"]
+    },
+    "product-owner": {
+      "path": ".ai/protocols/product-owner/",
+      "protocols": ["requirement-to-story", "backlog-refinement-flow"]
+    },
+    "qa": {
+      "path": ".ai/protocols/qa/",
+      "protocols": ["test-strategy-flow", "test-case-design-flow", "defect-triage-flow", "automation-planning-flow"]
+    },
+    "review": {
+      "path": ".ai/protocols/review/",
+      "protocols": ["multi-agent-review", "lightweight-review"]
+    },
+    "release": {
+      "path": ".ai/protocols/release/",
+      "protocols": ["release-readiness", "release-handoff"]
+    }
+  },
+  "available_templates": [
+    { "file": "plan.template.md" },
+    { "file": "review.template.md" },
+    { "file": "debug-report.template.md" },
+    { "file": "handoff.template.md" },
+    { "file": "decision-record.template.md" },
+    { "file": "task-summary.template.md" },
+    { "file": "agent-delegation.template.md" },
+    { "file": "skill.template.md" },
+    { "file": "protocol.template.md" },
+    { "file": "agent.template.md" },
+    { "file": "requirement.template.md" },
+    { "file": "acceptance-criteria.template.md" },
+    { "file": "test-case.template.md" },
+    { "file": "defect-report.template.md" },
+    { "file": "release-readiness.template.md" }
+  ],
+  "superpowers": {
+    "name": "superpowers",
+    "upstream": "https://github.com/obra/superpowers",
+    "skills_source": "https://github.com/obra/superpowers/tree/main/skills",
+    "license": "MIT",
+    "local_path": ".ai/skills/dev",
+    "purpose": "Reusable agentic software-development skills and methodology",
+    "usage": "Development skills are copied directly from upstream Superpowers skills into .ai/skills/dev. Do not rewrite or approximate them."
+  },
+  "harness_adapters": {
+    "cursor": ".ai/harnesses/cursor/README.md",
+    "claude_code": ".ai/harnesses/claude-code/README.md",
+    "codex": ".ai/harnesses/codex/README.md",
+    "zed": ".ai/harnesses/zed/README.md",
+    "github_copilot": ".ai/harnesses/github-copilot/README.md",
+    "gemini_cli": ".ai/harnesses/gemini-cli/README.md",
+    "opencode": ".ai/harnesses/opencode/README.md"
+  },
+  "compatibility": {
+    "harness_agnostic": true,
+    "dispatchers_before_details": true,
+    "categorized_structure": true,
+    "requires": "Any AI agent that can read markdown files from disk",
+    "no_tool_specific_config": true,
+    "no_dependencies": true,
+    "superpowers_integrated": true,
+    "file_format": "Markdown (.md) and JSON (.json)",
+    "human_readable": true
+  }
+}
