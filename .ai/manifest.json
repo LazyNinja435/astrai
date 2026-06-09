@@ -21,6 +21,7 @@
     "protocols": ".ai/protocols/",
     "templates": ".ai/templates/",
     "memory": ".ai/memory/",
+    "huddle_memory": ".ai/memory/huddle/",
     "integrations": ".ai/integrations/",
     "vendor": ".ai/vendor/",
     "harnesses": ".ai/harnesses/",
@@ -96,7 +97,7 @@
     "astrai": {
       "path": ".ai/skills/astrai/",
       "description": "AstrAI-specific operational skills",
-      "skills": ["startup", "project-bootstrap", "memory-update", "handoff", "skill-bridge", "dispatcher-maintenance"]
+      "skills": ["startup", "project-bootstrap", "memory-update", "handoff", "skill-bridge", "dispatcher-maintenance", "huddle"]
     },
     "product-owner": {
       "path": ".ai/skills/product-owner/",
@@ -127,7 +128,7 @@
   "agent_categories": {
     "astrai": {
       "path": ".ai/agents/astrai/",
-      "agents": ["dispatcher", "memory-curator", "project-bootstrapper"]
+      "agents": ["dispatcher", "memory-curator", "project-bootstrapper", "huddle-architect"]
     },
     "dev": {
       "path": ".ai/agents/dev/",
@@ -157,7 +158,7 @@
   "protocol_categories": {
     "astrai": {
       "path": ".ai/protocols/astrai/",
-      "protocols": ["startup-flow", "memory-update-flow", "new-project-bootstrap"]
+      "protocols": ["startup-flow", "memory-update-flow", "new-project-bootstrap", "huddle-flow"]
     },
     "dev": {
       "path": ".ai/protocols/dev/",
@@ -195,7 +196,8 @@
     { "file": "acceptance-criteria.template.md" },
     { "file": "test-case.template.md" },
     { "file": "defect-report.template.md" },
-    { "file": "release-readiness.template.md" }
+    { "file": "release-readiness.template.md" },
+    { "file": "huddle-session.template.md" }
   ],
   "superpowers": {
     "name": "superpowers",

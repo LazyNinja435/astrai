@@ -21,6 +21,7 @@
 | `astrai/startup-flow.md` | Mandatory agent startup sequence |
 | `astrai/memory-update-flow.md` | When and how to update memory |
 | `astrai/new-project-bootstrap.md` | Setting up AstrAI in a project |
+| `astrai/huddle-flow.md` | Persistent talk-only architectural conversation (huddle mode) |
 
 ### Dev Protocols (`.ai/protocols/dev/`)
 **When:** Development tasks. Reference Superpowers skills.

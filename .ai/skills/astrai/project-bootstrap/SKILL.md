@@ -25,8 +25,9 @@ Set up and customize AstrAI in a new or existing project. Guides curation of rul
 6. Curate agents — keep relevant, remove unused
 7. Curate protocols — keep relevant, remove unused
 8. Select harness adapters — read for tools the team uses
-9. Update manifest.json to reflect customizations
-10. Validate: all references resolve, no broken links, memory has real content
+9. Reset huddle memory — empty `.ai/memory/huddle/sessions/` and `archive/`, and reset `summary.md` to its stub so the new project does not inherit AstrAI's huddle history
+10. Update manifest.json to reflect customizations
+11. Validate: all references resolve, no broken links, memory has real content
 
 ## Output
 

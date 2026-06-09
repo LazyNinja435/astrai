@@ -12,6 +12,7 @@
 | Handoff | `handoff/SKILL.md` | Produce clean handoff documents |
 | Skill Bridge | `skill-bridge/SKILL.md` | Route dev tasks to Superpowers skills |
 | Dispatcher Maintenance | `dispatcher-maintenance/SKILL.md` | Maintain AstrAI dispatcher files |
+| Huddle | `huddle/SKILL.md` | Persistent, talk-only architectural conversation mode |
 
 ## When to Use AstrAI Skills
 
