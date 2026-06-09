@@ -44,7 +44,7 @@ Protocols orchestrate skills, agents, and templates into multi-step flows:
 
 | Category | Path | Purpose |
 |----------|------|---------|
-| AstrAI | `.ai/protocols/astrai/` | Startup, memory updates, project bootstrap |
+| AstrAI | `.ai/protocols/astrai/` | Startup, memory updates, project bootstrap, huddle mode |
 | Dev | `.ai/protocols/dev/` | Plan-then-implement, debug-then-fix, TDD, review-before-finish |
 | Product Owner | `.ai/protocols/product-owner/` | Requirement-to-story, backlog refinement |
 | QA | `.ai/protocols/qa/` | Test strategy, test case design, defect triage |
@@ -75,7 +75,7 @@ Development skills under `.ai/skills/dev/` are copied directly from [Superpowers
 
 | Category | Path | Purpose |
 |----------|------|---------|
-| AstrAI | `.ai/agents/astrai/` | Dispatcher, memory curator, bootstrapper |
+| AstrAI | `.ai/agents/astrai/` | Dispatcher, memory curator, bootstrapper, huddle architect |
 | Dev | `.ai/agents/dev/` | Architect, implementer, reviewer, debugger |
 | Product Owner | `.ai/agents/product-owner/` | Product owner, requirements analyst, backlog refiner |
 | QA | `.ai/agents/qa/` | QA architect, test designer, automation engineer, defect analyst |
@@ -112,14 +112,14 @@ Development skills under `.ai/skills/dev/` are copied directly from [Superpowers
     security/                (3 files)
   skills/
     dev/                     ← Superpowers skills (14 skills)
-    astrai/                  (6 skills)
+    astrai/                  (7 skills)
     product-owner/           (5 skills)
     qa/                      (6 skills)
     documentation/           (3 skills)
     security/                (3 skills)
     release/                 (3 skills)
   agents/
-    astrai/                  (3 agents + README)
+    astrai/                  (4 agents + README)
     dev/                     (4 agents + README)
     product-owner/           (3 agents + README)
     qa/                      (4 agents + README)
@@ -128,14 +128,14 @@ Development skills under `.ai/skills/dev/` are copied directly from [Superpowers
     release/                 (1 agent + README)
   protocols/
     protocols.md             ← Protocol dispatcher
-    astrai/                  (3 protocols)
+    astrai/                  (4 protocols)
     dev/                     (4 protocols)
     product-owner/           (2 protocols)
     qa/                      (4 protocols)
     review/                  (2 protocols)
     release/                 (2 protocols)
-  templates/                 (15 templates)
-  memory/                    (5 memory files)
+  templates/                 (16 templates)
+  memory/                    (5 memory files + huddle/ subtree)
   integrations/              (Superpowers integration doc)
   vendor/superpowers/        (LICENSE + README)
   harnesses/                 (7 adapters: cursor, claude-code, codex, zed, copilot, gemini-cli, opencode)
