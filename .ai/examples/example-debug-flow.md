@@ -72,7 +72,7 @@ Agent produces debug report using `.ai/templates/debug-report.template.md`:
 
 ### Step 9: Update Memory
 
-Following `.ai/protocols/astrai/memory-update-flow.md`, records in `.ai/memory/decisions.md` if applicable.
+Following `.ai/protocols/astrai/memory-update-flow.md`, writes a decision record in `.ai/memory/decisions/` if applicable, and harvests session learnings via `astrai/memory-harvest` (one immutable event file).
 
 ---
 

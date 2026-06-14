@@ -67,7 +67,7 @@ Following Superpowers skills:
 
 ### Step 7: Update Memory
 
-Following `.ai/protocols/astrai/memory-update-flow.md`, the agent records in `.ai/memory/decisions.md`:
+Following `.ai/protocols/astrai/memory-update-flow.md`, the agent writes a decision record `.ai/memory/decisions/YYYY-MM-DD-rate-limiting-approach.md`:
 - **Decision**: In-memory rate limiting with configurable per-endpoint windows
 - **Rationale**: Simple, meets current needs, distributed limiting deferred
 

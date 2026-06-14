@@ -16,7 +16,8 @@ Every AI agent must follow this sequence:
 8. **For development workflows**, prefer Superpowers skills under `.ai/skills/dev/`
 9. **Delegate to agents** from `.ai/agents/<category>/` only when specialization is needed
 10. **Use templates** from `.ai/templates/` for structured output
-11. **Update memory** in `.ai/memory/` only for durable project context
+11. **Create plans** in `.ai/plans/new/` using `.ai/templates/plan.template.md` (see "How Plans Work")
+12. **Update memory** in `.ai/memory/` only for durable project context — curated context (decision records in `decisions/`, constraints, glossary, open questions) via `astrai/memory-update`; per-session learnings as ONE immutable event file via `astrai/memory-harvest` (never edit existing events/snapshots; see `.ai/rules/project/memory-events.md`)
 
 ---
 
@@ -90,13 +91,27 @@ When instructions conflict, follow this order:
 
 ---
 
+## How Plans Work
+
+Plans are tracked through a three-folder lifecycle under `.ai/plans/`:
+
+1. **Create.** Write every new plan in `.ai/plans/new/` using `.ai/templates/plan.template.md`. Name it `YYYY-MM-DD-short-task-title.md`.
+2. **Start.** When you begin executing a plan, **move the file to `.ai/plans/wip/`** and set its `Status` to `wip`.
+3. **Track.** **After every step is completed, update the plan's Progress Tracking section** (mark the step done, set the date, record the verification result) and update `Last updated`. The plan file is the single source of truth for progress.
+4. **Finish.** When all steps are complete and verified, **move the file to `.ai/plans/completed/`** and set its `Status` to `completed`.
+
+A plan must live in exactly one of `new/`, `wip/`, or `completed/` at a time — its folder reflects its current state. See `.ai/plans/README.md` for the lifecycle table.
+
+---
+
 ## How to Finish a Task
 
 1. Verify all work against relevant rules
 2. Run the `verification-before-completion` skill (Superpowers)
 3. Run the `finishing-a-development-branch` skill if applicable (Superpowers)
-4. Update `.ai/memory/` only for durable decisions
-5. Provide a concise summary of what was done
+4. Update `.ai/memory/` only for durable decisions (write-once records in `.ai/memory/decisions/`)
+5. After a substantive session, harvest learnings via the `astrai/memory-harvest` skill (one immutable event file)
+6. Provide a concise summary of what was done
 
 ---
 
@@ -113,5 +128,7 @@ When instructions conflict, follow this order:
 | Role skills | `.ai/skills/<category>/` | Domain tasks |
 | Dev agents | `.ai/agents/dev/` | Dev delegation |
 | Templates | `.ai/templates/` | Structured output |
-| Memory | `.ai/memory/` | Durable context |
+| Plans | `.ai/plans/{new,wip,completed}/` | Track multi-step work; update after each step |
+| Memory | `.ai/memory/` | Durable context (decision records, curated files, events/snapshots) |
+| Memory events | `.ai/memory/events/<user>/` | One immutable event per work session (`astrai/memory-harvest`) |
 | Harness info | `.ai/harnesses/` | Informational only |

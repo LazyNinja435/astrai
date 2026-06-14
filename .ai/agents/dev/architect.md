@@ -36,4 +36,4 @@ Designs system architecture and evaluates architectural tradeoffs. Thinks in sys
 ## Related
 
 - Skills: `dev/brainstorming/` (Superpowers)
-- Memory: `memory/decisions.md`
+- Memory: `memory/decisions/` (write-once records; glob, newest first)

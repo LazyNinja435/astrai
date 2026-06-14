@@ -24,6 +24,12 @@ Bootstrap Start
 [3] Populate .ai/memory/constraints.md → Project-specific constraints
     │
     ▼
+[3b] Reset event-sourced memory → empty .ai/memory/events/ and
+     .ai/memory/snapshots/ (keep .gitkeep); remove template decision
+     records from .ai/memory/decisions/ that don't apply (there is no
+     decisions index to reset); ensure sandbox/ is gitignored
+    │
+    ▼
 [4] Curate rules → Remove unused, customize project-specific
     │
     ▼

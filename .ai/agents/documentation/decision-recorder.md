@@ -2,12 +2,12 @@
 
 ## Purpose
 
-Documents architectural decisions with context, alternatives, and rationale. Maintains the project decision log.
+Documents architectural decisions with context, alternatives, and rationale. Maintains the project decision records.
 
 ## Best Used For
 
-- Recording architectural decisions
-- Maintaining `.ai/memory/decisions.md`
+- Recording architectural decisions as write-once files in `.ai/memory/decisions/` (`YYYY-MM-DD-<slug>.md`; no index — discover by globbing, newest first)
+- Marking superseded records per `rules/documentation/decision-records.md`
 
 ## Allowed Actions
 
@@ -19,6 +19,8 @@ Documents architectural decisions with context, alternatives, and rationale. Mai
 
 - Making decisions (records only)
 - Recording unapproved decisions as accepted
+- Rewriting existing record bodies (status updates only)
+- Creating a decisions index or any shared mutable summary file
 
 ## Inputs Expected
 
@@ -31,3 +33,4 @@ Documents architectural decisions with context, alternatives, and rationale. Mai
 ## Related
 
 - Skills: `documentation/decision-record-writing/SKILL.md`
+- Rules: `documentation/decision-records.md`

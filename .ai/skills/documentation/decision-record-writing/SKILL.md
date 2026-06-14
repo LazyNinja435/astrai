@@ -24,16 +24,19 @@ Document architectural and project decisions with context, alternatives, and rat
 4. Explain rationale for the choice
 5. Document consequences (positive and negative)
 6. Use `.ai/templates/decision-record.template.md`
+7. Save the record as a write-once file at `.ai/memory/decisions/YYYY-MM-DD-<slug>.md` — there is no index to update; decisions are discovered by globbing the directory, newest first
+8. If this decision supersedes an earlier one, follow the supersession rule in `rules/documentation/decision-records.md`: mark the old record's status Superseded with a pointer to the new record (do not rewrite its body)
 
 ## Output
 
-A decision record ready for `.ai/memory/decisions.md`.
+A decision record file in `.ai/memory/decisions/`.
 
 ## Forbidden
 
 - Recording decisions without context or rationale
 - Omitting alternatives considered
 - Writing opinions as facts
+- Creating or maintaining a decisions index — record files are the only artifact
 
 ## Related
 

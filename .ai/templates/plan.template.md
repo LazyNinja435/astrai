@@ -3,6 +3,8 @@
 **Date:** <YYYY-MM-DD>
 **Planner:** <Agent/Person>
 **Complexity:** <Trivial | Small | Medium | Large>
+**Status:** <new | wip | completed>
+**Location:** `.ai/plans/<new|wip|completed>/<this-file>.md`
 
 ---
 
@@ -44,6 +46,28 @@
 **Verification:** <How to confirm this step is complete>
 
 <!-- Add more steps as needed -->
+
+---
+
+## Progress Tracking
+
+> Update this section after **every** completed step. Keep it as the single source of truth for plan status.
+
+**Plan status:** <new | wip | completed>
+**Current location:** `.ai/plans/<new|wip|completed>/<this-file>.md`
+**Last updated:** <YYYY-MM-DD>
+
+| Step | Description | Status | Completed (date) | Notes |
+|------|-------------|--------|------------------|-------|
+| 1 | <Step 1 title> | ☐ Not started / ◐ In progress / ☑ Done | <YYYY-MM-DD> | <verification result, links> |
+| 2 | <Step 2 title> | ☐ Not started / ◐ In progress / ☑ Done | <YYYY-MM-DD> | <verification result, links> |
+
+**Lifecycle checklist:**
+- [ ] Plan created in `.ai/plans/new/`
+- [ ] Moved to `.ai/plans/wip/` when work started
+- [ ] Tracking table updated after each step
+- [ ] All steps complete and verified
+- [ ] Moved to `.ai/plans/completed/`
 
 ---
 

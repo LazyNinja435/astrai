@@ -19,7 +19,7 @@
 | File | Purpose |
 |------|---------|
 | `astrai/startup-flow.md` | Mandatory agent startup sequence |
-| `astrai/memory-update-flow.md` | When and how to update memory |
+| `astrai/memory-update-flow.md` | When and how to update memory (curated context vs. event-sourced learnings) |
 | `astrai/new-project-bootstrap.md` | Setting up AstrAI in a project |
 | `astrai/huddle-flow.md` | Persistent talk-only architectural conversation (huddle mode) |
 

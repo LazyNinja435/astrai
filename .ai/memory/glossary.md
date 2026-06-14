@@ -24,6 +24,20 @@
 | **Superpowers** | Upstream dev skills by Jesse Vincent, copied into `.ai/skills/dev/`. |
 | **Skill Bridge** | AstrAI skill that routes dev tasks to the appropriate Superpowers skill. |
 
+## Memory Model Concepts
+
+| Term | Definition |
+|------|------------|
+| **Decision Record** | Write-once file `.ai/memory/decisions/YYYY-MM-DD-<slug>.md`. No index — discovered by globbing, newest first. |
+| **Event** | One immutable JSON file per work session at `.ai/memory/events/<user>/<date>-<task-slug>.json`, capturing that session's learnings. Never edited after creation. |
+| **Snapshot** | `.ai/memory/snapshots/<user>.json` — a user's compacted aggregate of folded events. Owner-only writes, only via the fold script. |
+| **Fold** | Deterministic derivation (`scripts/memory/fold.ts`) of the team knowledge view from snapshots + events. Aggregate state is computed at read time, never stored in committed files. |
+| **Derived View** | `sandbox/memory/knowledge.json` + `KNOWLEDGE.md` — local, gitignored output of the fold. Never committed, never hand-edited. |
+| **autoAnswer** | Computed flag on a clarification: 3+ distinct users hit the same question (or the snapshot stores the flag) — future agents may answer it without asking again. |
+| **systemic** | Computed flag on corrections/failure patterns/observations: total seenCount ≥ 2 (or stored flag) — the pattern recurs and deserves attention. |
+| **Compaction** | `fold.ts --compact --user <name>`: folds a user's events older than 60 days into their snapshot, deletes the folded files, prunes single-seen snapshot entries older than 180 days. Atomic and idempotent. |
+| **Graduation Ladder** | Memory curator duty: persistently systemic/autoAnswer knowledge graduates into rules or constraints (backed by a decision record), keeping memory a small staging area. |
+
 ## Workflow Concepts
 
 | Term | Definition |

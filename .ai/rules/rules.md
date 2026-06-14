@@ -22,6 +22,7 @@
 | `project/project-scope.md` | Always. Defines what is in and out of scope. |
 | `project/source-of-truth.md` | Always. Defines `.ai/` as source of truth for AI instructions. |
 | `project/memory-boundaries.md` | When reading or writing `.ai/memory/`. |
+| `project/memory-events.md` | When writing memory events/snapshots, running `scripts/memory/fold.ts`, or recording per-session learnings. |
 
 ### Git Rules (`.ai/rules/git/`)
 **When:** Performing any git operation.

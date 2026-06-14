@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Orchestrate huddle mode — a persistent, talk-only architectural conversation that resumes across sessions and writes only to `.ai/memory/`. Implementation is explicitly out of scope; it happens later in a fresh agent that reads `decisions.md`.
+Orchestrate huddle mode — a persistent, talk-only architectural conversation that resumes across sessions and writes only to `.ai/memory/`. Implementation is explicitly out of scope; it happens later in a fresh agent that reads the decision records in `.ai/memory/decisions/`.
 
 ## Trigger
 
@@ -28,8 +28,8 @@ Enter Huddle
     ▼
 [5] Classify outcomes
     │
-    ├── Settled → propose for decisions.md  ──► [user approves?] ── no ─► keep in session log
-    │                                                              └─ yes ─► write decisions.md
+    ├── Settled → propose decision record ──► [user approves?] ── no ─► keep in session log
+    │                                                           └─ yes ─► write decisions/YYYY-MM-DD-<slug>.md
     ├── Unresolved → open-questions.md / ideas/<topic>.md
     └── Still exploring → back to [3]
     │
@@ -40,12 +40,12 @@ Enter Huddle
 
 ## Hard Gate
 
-Writes are restricted to `.ai/memory/`. No code, plans, specs, or config — ever. `decisions.md` writes require explicit user approval.
+Writes are restricted to `.ai/memory/`. No code, plans, specs, or config — ever. Decision record writes require explicit user approval.
 
 ## Roles
 
 - **Huddle Architect** (`astrai/huddle-architect.md`): runs the conversation, logs, proposes decisions
-- **User**: directs the discussion, approves what graduates to `decisions.md`
+- **User**: directs the discussion, approves what graduates to a decision record
 
 ## Exit Criteria
 

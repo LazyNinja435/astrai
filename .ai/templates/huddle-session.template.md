@@ -8,7 +8,7 @@ status: open
 # Huddle Session — <YYYY-MM-DD> — <author>
 
 > Append-only architectural conversation log. One file per huddle session.
-> Talk only — no implementation. Decided items graduate to `decisions.md` (user-gated);
+> Talk only — no implementation. Decided items graduate to a write-once record in `decisions/` (user-gated);
 > unresolved items go to `open-questions.md`. Reference canonical files, never duplicate them.
 
 ## Context Loaded
@@ -32,6 +32,6 @@ status: open
 
 ## Outcomes This Session
 
-- **Settled (→ proposed for `decisions.md`, pending user approval):** <item or "none">
+- **Settled (→ proposed as a `decisions/` record, pending user approval):** <item or "none">
 - **Open threads (→ `open-questions.md` / `ideas/<topic>.md`):** <item or "none">
 - **Next time start here:** <where to resume>

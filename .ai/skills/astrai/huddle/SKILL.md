@@ -19,25 +19,25 @@ Do NOT use for turning one idea into a spec to build now — that is the Superpo
 
 ## Workflow
 
-1. **Load context (always):** Read `.ai/memory/huddle/summary.md` and the most recent files in `.ai/memory/huddle/sessions/` (chronological). Read core memory (`decisions.md`, `open-questions.md`, `constraints.md`, `project.md`). Drill into `ideas/<topic>.md` or `archive/` only when a topic or old thread is referenced.
+1. **Load context (always):** Read `.ai/memory/huddle/summary.md` and the most recent files in `.ai/memory/huddle/sessions/` (chronological). Read core memory (`open-questions.md`, `constraints.md`, `project.md`; glob recent decision records in `decisions/`, newest first — titles only). Drill into `ideas/<topic>.md`, `archive/`, or full decision record bodies only when a topic or old thread is referenced.
 2. **Resume:** Briefly summarize where the huddle left off and confirm with the user before continuing.
 3. **Converse as architect:** Ask one question at a time. Weigh 2-3 approaches with trade-offs and a recommendation. Think in systems, not files.
 4. **Log:** Append the discussion to today's session file `.ai/memory/huddle/sessions/YYYY-MM-DD-<author>.md` (create from `huddle-session.template.md` if new). Append-only.
-5. **Record outcomes:** Note settled directions and open threads in the session file. Only propose graduation to `decisions.md` — never write it without explicit user approval.
+5. **Record outcomes:** Note settled directions and open threads in the session file. Only propose graduation to a decision record (`.ai/memory/decisions/YYYY-MM-DD-<slug>.md`) — never write one without explicit user approval.
 6. **Close out / compact:** On exit, write the "next time start here" note. If the active log has grown past a reasonable threshold, fold older sessions' essence into `summary.md` (rewrite, ~1 page) and move raw old files to `archive/`.
 
 ## Output
 
 - Updated session log in `.ai/memory/huddle/sessions/`
 - Updated `summary.md` continuity digest
-- User-approved decisions promoted to `decisions.md`; open questions to `open-questions.md`
+- User-approved decisions recorded as write-once files in `decisions/`; open questions to `open-questions.md`
 
 ## Forbidden
 
 - Writing, editing, or scaffolding ANY file outside `.ai/memory/` (hard gate — talk only)
 - Writing code, plans, specs, or config
-- Writing to `decisions.md` without explicit user approval
-- Duplicating canonical content — reference `decisions.md` / `open-questions.md`, do not copy
+- Writing a decision record without explicit user approval
+- Duplicating canonical content — reference decision records / `open-questions.md`, do not copy
 - Storing secrets, credentials, or personal data in logs
 - Recreating the Superpowers `dev/brainstorming` build-funnel workflow
 

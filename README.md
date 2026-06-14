@@ -2,7 +2,7 @@
 
 **The astra for intelligence.**
 
-AstrAI is a harness-agnostic AI project base that gives any repository a portable operating layer for AI agents. It organizes rules, skills, agents, protocols, templates, and memory under `.ai/` with categorized role/domain folders so different AI coding tools can work from the same source of truth.
+AstrAI is a harness-agnostic AI project base that gives any repository a portable operating layer for AI agents. It organizes rules, skills, agents, protocols, templates, plans, and event-sourced memory under `.ai/` with categorized role/domain folders so different AI coding tools can work from the same source of truth.
 
 ---
 
@@ -28,7 +28,7 @@ Rules are laws. `.ai/rules/rules.md` helps agents select only the rules relevant
 
 | Category | Path | Purpose |
 |----------|------|---------|
-| Project | `.ai/rules/project/` | Scope, source of truth, memory boundaries |
+| Project | `.ai/rules/project/` | Scope, source of truth, memory boundaries, memory events |
 | Git | `.ai/rules/git/` | Commits, branching, destructive actions |
 | Safety | `.ai/rules/safety/` | Secrets, user data, external content |
 | Coding | `.ai/rules/coding/` | Basics, dependencies, refactoring, testing |
@@ -58,7 +58,7 @@ Protocols orchestrate skills, agents, and templates into multi-step flows:
 | Category | Path | Source |
 |----------|------|--------|
 | Dev | `.ai/skills/dev/` | Superpowers (upstream) |
-| AstrAI | `.ai/skills/astrai/` | AstrAI-authored |
+| AstrAI | `.ai/skills/astrai/` | AstrAI-authored (startup, bootstrap, memory-update, memory-harvest, huddle, …) |
 | Product Owner | `.ai/skills/product-owner/` | AstrAI-authored |
 | QA | `.ai/skills/qa/` | AstrAI-authored |
 | Documentation | `.ai/skills/documentation/` | AstrAI-authored |
@@ -103,7 +103,7 @@ Development skills under `.ai/skills/dev/` are copied directly from [Superpowers
   NOTICE.md                  ← Attribution and licenses
   rules/
     rules.md                 ← Rules dispatcher
-    project/                 (3 files)
+    project/                 (4 files)
     git/                     (4 files)
     safety/                  (4 files)
     coding/                  (4 files)
@@ -112,7 +112,7 @@ Development skills under `.ai/skills/dev/` are copied directly from [Superpowers
     security/                (3 files)
   skills/
     dev/                     ← Superpowers skills (14 skills)
-    astrai/                  (7 skills)
+    astrai/                  (8 skills)
     product-owner/           (5 skills)
     qa/                      (6 skills)
     documentation/           (3 skills)
@@ -135,24 +135,92 @@ Development skills under `.ai/skills/dev/` are copied directly from [Superpowers
     review/                  (2 protocols)
     release/                 (2 protocols)
   templates/                 (16 templates)
-  memory/                    (5 memory files + huddle/ subtree)
+  plans/
+    README.md                ← Plan lifecycle overview
+    new/                     ← Created, not yet started
+    wip/                     ← Work in progress
+    completed/               ← Finished and verified
+  memory/
+    project.md               ← Curated: project overview
+    constraints.md           ← Curated: hard constraints
+    glossary.md              ← Curated: terminology
+    open-questions.md        ← Curated: unresolved questions
+    decisions/               ← Write-once decision records (no index — glob, newest first)
+    events/<user>/           ← One immutable event file per work session (committed)
+    snapshots/<user>.json    ← Compacted per-user aggregates (owner-only, via fold --compact)
+    huddle/                  ← Huddle mode conversation memory
   integrations/              (Superpowers integration doc)
   vendor/superpowers/        (LICENSE + README)
   harnesses/                 (7 adapters: cursor, claude-code, codex, zed, copilot, gemini-cli, opencode)
   examples/                  (5 example walkthroughs)
+
+scripts/
+  memory/fold.ts             ← Optional: deterministic fold of events+snapshots (Node builtins only)
+  memory/fold.test.ts        ← Fixture test (npx tsx scripts/memory/fold.test.ts)
+
+sandbox/memory/              ← Gitignored, local-only (knowledge.json, KNOWLEDGE.md — from fold.ts)
 ```
+
+---
+
+## Quick Reference
+
+| What | Where | When |
+|------|-------|------|
+| Root dispatcher | `AGENTS.md` | Always, first |
+| Manifest | `.ai/manifest.json` | After AGENTS.md |
+| Rules dispatcher | `.ai/rules/rules.md` | After manifest |
+| Protocol dispatcher | `.ai/protocols/protocols.md` | After rules |
+| Dev skills | `.ai/skills/dev/` | Dev tasks |
+| AstrAI skills | `.ai/skills/astrai/` | AstrAI operations |
+| Role skills | `.ai/skills/<category>/` | Domain tasks |
+| Dev agents | `.ai/agents/dev/` | Dev delegation |
+| Templates | `.ai/templates/` | Structured output |
+| Plans | `.ai/plans/{new,wip,completed}/` | Track multi-step work; update after each step |
+| Memory | `.ai/memory/` | Durable context (decision records, curated files, events/snapshots) |
+| Memory events | `.ai/memory/events/<user>/` | One immutable event per work session (`astrai/memory-harvest`) |
+| Fold script | `scripts/memory/fold.ts` | Derive local team view into `sandbox/memory/` |
+| Harness info | `.ai/harnesses/` | Informational only |
+
+---
+
+## Team Memory (Event-Sourced)
+
+Shared, hand-edited memory files conflict as soon as two contributors work concurrently. AstrAI's memory model removes that failure mode: **no committed file ever has two writers; all aggregate state is computed locally at read time, never stored.**
+
+- **Curated context** (`project.md`, `constraints.md`, `glossary.md`, `open-questions.md`) is deliberate, low-churn reference material.
+- **Decision records** are write-once files in `.ai/memory/decisions/` — there is no index; discover by globbing, newest first.
+- **Per-session learnings** are harvested as ONE immutable event file per session (`.ai/memory/events/<user>/<date>-<task-slug>.json`) via the `astrai/memory-harvest` skill. Events are never edited.
+- **The fold** (`npx tsx scripts/memory/fold.ts`) derives the team view locally into gitignored `sandbox/memory/` — deduped entries with computed `seenCount`, contributor lists, and `autoAnswer`/`systemic` flags. The script is optional tooling (Node builtins only, the sanctioned exception to "no dependencies"); the plain-JSON format works without it.
+- **Compaction** (`fold.ts --compact --user <name>`) folds a user's old events into their own snapshot; **graduation** promotes persistently systemic knowledge into rules/constraints via decision records, keeping memory small.
+
+Invariants live in `.ai/rules/project/memory-events.md`. The full model is also indexed in `.ai/manifest.json` under `memory_model`.
+
+---
+
+## How Plans Work
+
+Multi-step work is tracked through a three-folder lifecycle under `.ai/plans/`:
+
+1. **Create** in `.ai/plans/new/` using `.ai/templates/plan.template.md` (`YYYY-MM-DD-short-task-title.md`).
+2. **Start** — move to `.ai/plans/wip/` and set `Status` to `wip`.
+3. **Track** — after every completed step, update the plan's Progress Tracking section and `Last updated`.
+4. **Finish** — when all steps are verified, move to `.ai/plans/completed/` and set `Status` to `completed`.
+
+A plan lives in exactly one folder at a time. See `.ai/plans/README.md` for the lifecycle table.
 
 ---
 
 ## How to Use AstrAI in a New Project
 
-1. Copy `.ai/` and `AGENTS.md` into your repo root
+1. Copy `.ai/`, `AGENTS.md`, and `scripts/` into your repo root
 2. Customize `.ai/memory/project.md` with your project's specifics
 3. Customize `.ai/memory/constraints.md` with your project's constraints
 4. Curate rules, skills, agents, and protocols — keep what fits, remove what doesn't
 5. Update `.ai/manifest.json`
 6. Read harness adapters for the tools your team uses
 7. See `.ai/protocols/astrai/new-project-bootstrap.md` for the full guided setup
+8. After substantive sessions, harvest learnings with `astrai/memory-harvest`; run `npx tsx scripts/memory/fold.ts` locally when you want a derived team view
 
 ---
 
@@ -188,6 +256,8 @@ Development skills under `.ai/skills/dev/` are copied directly from [Superpowers
 - **Protocols orchestrate flows.** Compose skills, agents, and templates.
 - **Templates standardize outputs.** Consistency across agents and tools.
 - **Memory stores durable project context.** Not session state, not secrets.
+- **Plans are the source of truth for multi-step work.** One folder reflects status; progress is updated after every step.
+- **No committed memory file has two writers.** Per-session learnings are immutable events; aggregates are computed locally at read time, never stored.
 - **No tool-specific lock-in.** No hidden config files.
 - **Superpowers for dev.** Development workflows use upstream Superpowers skills directly.
 - **Human-readable first.** Anyone can open and understand any file.
