@@ -31,10 +31,6 @@
 
 `.ai/memory/huddle/` is the one place exploratory, in-progress, and not-yet-decided architectural thinking may live. Huddle session logs are append-only conversation records, not durable decisions. When a huddle idea becomes a durable decision, promote it to a record file in `decisions/` (with user approval); when it stays unresolved, record it in `open-questions.md`. Huddle files reference these canonical files — they do not duplicate them. The "no speculative information" rule above does not apply inside `.ai/memory/huddle/`; all other rules (no secrets, no personal data) still do.
 
-## Rule: Huddle Memory Is the Exception for Exploration
-
-`.ai/memory/huddle/` is the one place exploratory, in-progress, and not-yet-decided architectural thinking may live. Huddle session logs are append-only conversation records, not durable decisions. When a huddle idea becomes a durable decision, promote it to `decisions.md` (with user approval); when it stays unresolved, record it in `open-questions.md`. Huddle files reference these canonical files — they do not duplicate them. The "no speculative information" rule above does not apply inside `.ai/memory/huddle/`; all other rules (no secrets, no personal data) still do.
-
 ## Rule: Update Sparingly
 
 Only write to memory when the information will matter beyond the current session. If in doubt, ask the user before writing.
